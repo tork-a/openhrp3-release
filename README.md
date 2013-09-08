@@ -1,3 +1,22 @@
+## openhrp3 - 0.0.1-6
+
+User `k-okada@kokada-t430s` released the packages in the `openhrp3` repository by running `/usr/bin/bloom-release --rosdistro groovy --track groovy openhrp3` on `Sun, 08 Sep 2013 02:24:45 -0000`
+
+The `openhrp3` package was released.
+
+Version of package(s) in repository `openhrp3`:
+- rosdistro version: `0.0.1-5`
+- old version: `0.0.1-5`
+- new version: `0.0.1-6`
+
+Versions of tools used:
+- bloom version: `0.4.4`
+- catkin_pkg version: `0.1.19`
+- rosdep version: `0.10.21`
+- rosdistro version: `0.2.13`
+- vcstools version: `0.1.31`
+
+
 ## openhrp3 - 0.0.1-5
 
 User `k-okada@kokada-t430s` released the packages in the `openhrp3` repository by running `/usr/bin/bloom-release --rosdistro groovy --track groovy openhrp3` on `Tue, 03 Sep 2013 16:41:54 -0000`

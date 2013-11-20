@@ -1,3 +1,22 @@
+## openhrp3 - 3.1.5-1
+
+User `n130s@130s-serval` released the packages in the `openhrp3` repository by running `/usr/bin/bloom-release --rosdistro groovy --track groovy openhrp3` on `Wed, 20 Nov 2013 03:13:29 -0000`
+
+The `openhrp3` package was released.
+
+Version of package(s) in repository `openhrp3`:
+- rosdistro version: `3.1.3-0`
+- old version: `3.1.5-0`
+- new version: `3.1.5-1`
+
+Versions of tools used:
+- bloom version: `0.4.4`
+- catkin_pkg version: `0.1.23`
+- rosdep version: `0.10.24`
+- rosdistro version: `0.2.17`
+- vcstools version: `0.1.32`
+
+
 ## openhrp3 - 3.1.5-0
 
 User `n130s@130s-serval` released the packages in the `openhrp3` repository by running `/usr/bin/bloom-release --rosdistro groovy --track groovy openhrp3` on `Wed, 20 Nov 2013 02:13:18 -0000`

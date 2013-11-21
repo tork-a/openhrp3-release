@@ -1,3 +1,22 @@
+## openhrp3 - 3.1.5-1
+
+User `n130s@130s-t440s` released the packages in the `openhrp3` repository by running `/usr/bin/bloom-release --rosdistro hydro --track hydro openhrp3` on `Thu, 21 Nov 2013 08:49:23 -0000`
+
+The `openhrp3` package was released.
+
+Version of package(s) in repository `openhrp3`:
+- rosdistro version: `3.1.3-0`
+- old version: `3.1.5-0`
+- new version: `3.1.5-1`
+
+Versions of tools used:
+- bloom version: `0.4.4`
+- catkin_pkg version: `0.1.23`
+- rosdep version: `0.10.24`
+- rosdistro version: `0.2.17`
+- vcstools version: `0.1.32`
+
+
 ## openhrp3 - 3.1.5-0
 
 User `n130s@130s-t440s` released the packages in the `openhrp3` repository by running `/usr/bin/bloom-release --rosdistro hydro --track hydro openhrp3` on `Thu, 21 Nov 2013 08:42:29 -0000`

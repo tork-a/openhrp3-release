@@ -34,8 +34,8 @@ tracks:
     patches: null
     release_inc: '1'
     release_repo_url: null
-    release_tag: null
+    release_tag: :{version}
     ros_distro: hydro
-    vcs_type: svn
-    vcs_uri: https://rtm-ros-robotics.googlecode.com/svn/tags/openhrp3-:{version}
-    version: :{ask}
+    vcs_type: git
+    vcs_uri: https://github.com/start-jsk/openhrp3.git
+    version: :{auto}

@@ -1,0 +1,9 @@
+ros-hydro-openhrp3 (3.1.5-4precise) precise; urgency=high
+
+  * Fix to an issue that caused https://github.com/start-jsk/hrpsys/issues/25
+  * Initial commit of CHANGELOG.rst
+  * Contributors: Kei Okada, chen.jsk, Ryohei Ueda, Isaac Isao Saito, Hiroyuki Mikita, Iori Kumagai, Takuya Nakaoka, Shunichi Nozawa, Rosen Diankov, Yohei Kakiuchi
+
+ -- Kei Okada <k-okada@jsk.t.u-tokyo.ac.jp>  Mon, 03 Mar 2014 15:00:00 -0000
+
+

@@ -1,3 +1,22 @@
+## openhrp3 (hydro) - 3.1.5-5
+
+User `n130s@yayoi` released the packages in the `openhrp3` repository into the `hydro` distro by running `/usr/bin/bloom-release openhrp3 --track hydro --rosdistro hydro` on `Fri, 07 Mar 2014 11:00:18 -0000`
+
+The `openhrp3` package was released.
+
+Version of package(s) in repository `openhrp3`:
+- rosdistro version: `3.1.5-4`
+- old version: `3.1.5-4`
+- new version: `3.1.5-5`
+
+Versions of tools used:
+- bloom version: `0.5.2`
+- catkin_pkg version: `0.1.26`
+- rosdep version: `0.10.25`
+- rosdistro version: `0.3.4`
+- vcstools version: `0.1.33`
+
+
 ## openhrp3 (groovy) - 3.1.5-5
 
 User `n130s@yayoi` released the packages in the `openhrp3` repository into the `groovy` distro by running `/usr/bin/bloom-release openhrp3 --track groovy --rosdistro groovy` on `Fri, 07 Mar 2014 10:24:39 -0000`

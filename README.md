@@ -1,3 +1,24 @@
+## openhrp3 (indigo) - 3.1.7-0
+
+The packages in the `openhrp3` repository were released into the `indigo` distro by running `/usr/bin/bloom-release --rosdistro indigo --track indigo openhrp3 --edit` on `Sat, 04 Oct 2014 13:06:25 -0000`
+
+The `openhrp3` package was released.
+
+Version of package(s) in repository `openhrp3`:
+- upstream repository: https://github.com/fkanehiro/openhrp3.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `3.1.7-0`
+
+Versions of tools used:
+- bloom version: `0.5.11`
+- catkin_pkg version: `0.2.4`
+- rosdep version: `0.10.30`
+- rosdistro version: `0.3.5`
+- vcstools version: `0.1.35`
+
+
 ## openhrp3 (hydro) - 3.1.5-6
 
 User `n130s@130s-serval` released the packages in the `openhrp3` repository into the `hydro` distro by running `/usr/bin/bloom-release --rosdistro hydro --track hydro openhrp3` on `Tue, 15 Apr 2014 08:29:58 -0000`

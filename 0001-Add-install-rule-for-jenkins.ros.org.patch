@@ -1,4 +1,4 @@
-From d3a9b6e2667f3362cdd45a5eb1b5ed82e86b588d Mon Sep 17 00:00:00 2001
+From c9238702eeffd6df858889110b7e0d57aa98a5df Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Wed, 8 Oct 2014 02:11:50 +0900
 Subject: [PATCH] Add install rule for jenkins.ros.org

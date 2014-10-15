@@ -1,10 +1,10 @@
-From 303b2ef181a63734fb6b8042d7550492cb9efc5d Mon Sep 17 00:00:00 2001
+From 03b1d46dfa69963d28c65b2d6f4c3907a20bd9d3 Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Wed, 8 Oct 2014 02:11:50 +0900
 Subject: [PATCH] Add install rule for jenkins.ros.org
 
 ---
- CMakeLists.txt |    4 ++--
+ CMakeLists.txt | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
@@ -25,5 +25,5 @@ index 182f7b0..4cccb4c 100644
 +#endif()
  
 -- 
-1.7.9.5
+1.9.1
 

@@ -60,7 +60,7 @@ if(UNIX)
       hrpCorbaStubSkel-${OPENHRP_LIBRARY_VERSION}
       hrpCollision-${OPENHRP_LIBRARY_VERSION}
       ${OMNIORB_LIBRARIES}
-      #boost_filesystem-mt boost_regex-mt
+      #boost_filesystem boost_regex
       ${Boost_REGEX_LIBRARY}
       #${Boost_LIBRARIES}
       dl)
@@ -111,7 +111,7 @@ if(OPENHRP_3_0_CUSTOMIZERS)
         DESTINATION ${RELATIVE_SHARE_INSTALL_PATH}/customizer CONFIGURATIONS Release Debug)
     else()
       install(TARGETS ${customizer}
-        LIBRARY DESTINATION ${RELATIVE_SHARE_INSTALL_PATH}/customizer CONFIGURATIONS Release Debug)
+        LIBRARY DESTINATION ${RELATIVE_SHARE_INSTALL_PATH}/customizer CONFIGURATIONS Release Debug RelWithDebInfo)
     endif()
   endforeach()
 endif()

@@ -28,6 +28,8 @@ tracks:
     - git-bloom-generate -y rosrelease :{ros_distro} --source upstream -i :{release_inc}
     - git-bloom-generate -y rosdebian --prefix release/:{ros_distro} :{ros_distro}
       -i :{release_inc}
+    - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
+      :{release_inc}
     devel_branch: null
     last_version: 3.1.5
     name: upstream
@@ -37,7 +39,7 @@ tracks:
     release_tag: :{version}
     ros_distro: hydro
     vcs_type: git
-    vcs_uri: https://github.com/start-jsk/openhrp3.git
+    vcs_uri: https://github.com/fkanehiro/openhrp3.git
     version: :{auto}
   indigo:
     actions:

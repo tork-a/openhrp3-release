@@ -1,0 +1,32 @@
+From 99fef67a47f5ed0330a8d233897088c332b28e51 Mon Sep 17 00:00:00 2001
+From: Kei Okada <kei.okada@gmail.com>
+Date: Thu, 12 Feb 2015 13:50:56 +0900
+Subject: [PATCH 2/2] import SDOPackage_idl, and fix module name
+ OpenHRP->OpenHRP3
+
+---
+ hrplib/hrpCorba/CMakeLists.txt |    8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/hrplib/hrpCorba/CMakeLists.txt b/hrplib/hrpCorba/CMakeLists.txt
+index 22bb458..e795acd 100644
+--- a/hrplib/hrpCorba/CMakeLists.txt
++++ b/hrplib/hrpCorba/CMakeLists.txt
+@@ -76,6 +76,14 @@ install(TARGETS ${target}
+ 
+ set(given_headers ORBwrap.h)
+ 
++add_custom_command(
++  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/OpenHRP/__init__.py
++  COMMAND sed -i -e "'s@import omniORB$$@import omniORB; from OpenRTM_aist.RTM_IDL import SDOPackage_idl@'" ${CMAKE_CURRENT_BINARY_DIR}/OpenHRP/__init__.py
++  COMMAND sed -i -e "'s@\"OpenHRP\"@\"OpenHRP3\"@'" ${CMAKE_CURRENT_BINARY_DIR}/OpenHRP/__init__.py
++  DEPENDS ${idl_py_files}
++  )
++add_custom_target(fix_openhrp_idl ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/OpenHRP/__init__.py)
++
+ install(FILES ${given_headers} ${idl_h_files} DESTINATION ${RELATIVE_HEADERS_INSTALL_PATH}/hrpCorba)
+ execute_process(
+   COMMAND python -c "import sys; print '%s.%s'%(sys.version_info[0:2])"
+-- 
+1.7.9.5
+

@@ -1,10 +1,10 @@
-From 9e82254ad19fceb7a2269730961a60f8ad1844e2 Mon Sep 17 00:00:00 2001
+From 31ef633f8ff393367d95c6b9f97e0a030b1414b7 Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Wed, 11 Feb 2015 01:27:40 +0900
-Subject: [PATCH] fix for backword compatibility
+Subject: [PATCH 1/2] fix for backword compatibility
 
 ---
- CMakeLists.txt | 4 ++++
+ CMakeLists.txt |    4 ++++
  1 file changed, 4 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
@@ -22,5 +22,5 @@ index 6847991..2571b6c 100644
  endif()
  
 -- 
-1.9.1
+1.7.9.5
 

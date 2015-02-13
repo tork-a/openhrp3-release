@@ -1,11 +1,11 @@
-From 99fef67a47f5ed0330a8d233897088c332b28e51 Mon Sep 17 00:00:00 2001
+From ab63655f25a6eeed85fafff0b4c4422bfa3be1c6 Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Thu, 12 Feb 2015 13:50:56 +0900
-Subject: [PATCH 2/2] import SDOPackage_idl, and fix module name
+Subject: [PATCH 2/4] import SDOPackage_idl, and fix module name
  OpenHRP->OpenHRP3
 
 ---
- hrplib/hrpCorba/CMakeLists.txt |    8 ++++++++
+ hrplib/hrpCorba/CMakeLists.txt | 8 ++++++++
  1 file changed, 8 insertions(+)
 
 diff --git a/hrplib/hrpCorba/CMakeLists.txt b/hrplib/hrpCorba/CMakeLists.txt
@@ -28,5 +28,5 @@ index 22bb458..e795acd 100644
  execute_process(
    COMMAND python -c "import sys; print '%s.%s'%(sys.version_info[0:2])"
 -- 
-1.7.9.5
+1.9.1
 

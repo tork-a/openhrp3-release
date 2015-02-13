@@ -555,7 +555,7 @@ if(ENABLE_CPACK)
 endif(ENABLE_CPACK)
 
 #if catkin environment
-string(REGEX MATCH "catkin" need_catkin "$ENV{_}")
+string(REGEX MATCH "catkin" need_catkin $ENV{_})
 if(need_catkin OR "${CATKIN_BUILD_BINARY_PACKAGE}")
   install(FILES package.xml DESTINATION share/openhrp3/)
   install(DIRECTORY test DESTINATION share/openhrp3 USE_SOURCE_PERMISSIONS)
@@ -567,35 +567,5 @@ if(need_catkin OR "${CATKIN_BUILD_BINARY_PACKAGE}")
   install(CODE "execute_process(COMMAND cmake -E create_symlink ../../bin/openhrp-model-loader openhrp-model-loader WORKING_DIRECTORY \$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/share/openhrp3)")
   install(CODE "execute_process(COMMAND cmake -E create_symlink ../../bin/export-collada       export-collada       WORKING_DIRECTORY \$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/lib/openhrp3)")
   install(CODE "execute_process(COMMAND cmake -E create_symlink ../../bin/export-collada       export-collada       WORKING_DIRECTORY \$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/share/openhrp3)")
-  install(CODE "
-execute_process(COMMAND cmake -E make_directory share WORKING_DIRECTORY \$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/share/openhrp3)
-execute_process(COMMAND cmake -E create_symlink ../../OpenHRP-3.1 share/OpenHRP-3.1 WORKING_DIRECTORY \$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/share/openhrp3)
-")
-endif()
-string(REGEX MATCH "catkin" need_catkin "$ENV{_}")
-if(need_catkin)
-  install(CODE "
-## this is tricky force write catkin marker file
-set(_catkin_marker_file \"\${CMAKE_INSTALL_PREFIX}/.catkin\")
-# check if the develspace marker file exists yet
-if(EXISTS \${_catkin_marker_file})
-  file(READ \${_catkin_marker_file} _existing_sourcespaces)
-  if(_existing_sourcespaces STREQUAL \"\")
-    # write this sourcespace to the marker file
-    file(WRITE \${_catkin_marker_file} \"${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}\")
-  else()
-    # append to existing list of sourcespaces if it's not in the list
-    list(FIND _existing_sourcespaces \"${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}\" _existing_sourcespace_index)
-    if(_existing_sourcespace_index EQUAL -1)
-      file(APPEND \${_catkin_marker_file} \";${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}\")
-    endif()
-  endif()
-else()
-  # create a new develspace marker file
-  # NOTE: extra care must be taken when running multiple catkin jobs in parallel
-  #       so that this does not overwrite the result of a similar call in another package
-  file(WRITE \${_catkin_marker_file} \"${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}\")
-endif()
-")
 endif()
 

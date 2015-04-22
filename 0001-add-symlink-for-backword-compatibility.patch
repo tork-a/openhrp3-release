@@ -1,7 +1,7 @@
-From eb30b87e35783724ec71f3f0270d5663ccd05e47 Mon Sep 17 00:00:00 2001
+From ed180f19b6248c42f3abab9fae3cdfec48a368cf Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Wed, 11 Feb 2015 01:27:03 +0900
-Subject: [PATCH 1/4] add symlink for backword compatibility
+Subject: [PATCH 1/5] add symlink for backword compatibility
 
 ---
  CMakeLists.txt | 4 ++++

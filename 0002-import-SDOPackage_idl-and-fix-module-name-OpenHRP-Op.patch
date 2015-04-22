@@ -1,7 +1,7 @@
-From ab63655f25a6eeed85fafff0b4c4422bfa3be1c6 Mon Sep 17 00:00:00 2001
+From 08114ff58176a8fdf251427b3a3cf5fe7e4d7a8b Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Thu, 12 Feb 2015 13:50:56 +0900
-Subject: [PATCH 2/4] import SDOPackage_idl, and fix module name
+Subject: [PATCH 2/5] import SDOPackage_idl, and fix module name
  OpenHRP->OpenHRP3
 
 ---

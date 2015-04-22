@@ -22,7 +22,7 @@ project(OpenHRP)
 
 set(OPENHRP_VERSION_MAJOR 3)
 set(OPENHRP_VERSION_MINOR 1)
-set(OPENHRP_VERSION_MICRO 7)
+set(OPENHRP_VERSION_MICRO 8)
 set(OPENHRP_VERSION_ADD_TAIL )
 set(CPACK_DEBIAN_PACKAGE_VERSION_TAIL 0)
 
@@ -572,9 +572,9 @@ execute_process(COMMAND cmake -E make_directory share WORKING_DIRECTORY \$ENV{DE
 execute_process(COMMAND cmake -E create_symlink ../../OpenHRP-3.1 share/OpenHRP-3.1 WORKING_DIRECTORY \$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/share/openhrp3)
 ")
 endif()
-string(REGEX MATCH "catkin" need_catkin "$ENV{_}")
 if(need_catkin)
-  install(CODE "
+  install(CODE
+"
 ## this is tricky force write catkin marker file
 set(_catkin_marker_file \"\${CMAKE_INSTALL_PREFIX}/.catkin\")
 # check if the develspace marker file exists yet
@@ -592,7 +592,7 @@ if(EXISTS \${_catkin_marker_file})
   endif()
 else()
   # create a new develspace marker file
-  # NOTE: extra care must be taken when running multiple catkin jobs in parallel
+  # NOTE: extra care must be taken when running multiple catkin jobs in parallel 
   #       so that this does not overwrite the result of a similar call in another package
   file(WRITE \${_catkin_marker_file} \"${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}\")
 endif()

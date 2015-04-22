@@ -1,7 +1,7 @@
-From 386a9172ce18992de190f91237622724da6c4013 Mon Sep 17 00:00:00 2001
+From d89dd3393cd9820e8b11afabdfef5e668ef00c0e Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Wed, 11 Feb 2015 01:27:40 +0900
-Subject: [PATCH 1/4] fix for backword compatibility
+Subject: [PATCH 1/5] fix for backword compatibility
 
 ---
  CMakeLists.txt | 4 ++++

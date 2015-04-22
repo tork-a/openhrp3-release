@@ -1,7 +1,7 @@
-From 2e7cef0875a3f4b9ca5c76a0df7b02179db8443a Mon Sep 17 00:00:00 2001
+From bd10a111533956feb07a0d5d9c0876b965fa2fbe Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Fri, 13 Feb 2015 20:13:36 +0900
-Subject: [PATCH 4/4] fix for cmake error on new builddfirm
+Subject: [PATCH 4/5] fix for cmake error on new builddfirm
 
 ---
  CMakeLists.txt | 2 +-

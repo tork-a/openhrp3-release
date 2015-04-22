@@ -1,7 +1,7 @@
-From c4fb556bfaa0b578f0422149444168cef5a51c5a Mon Sep 17 00:00:00 2001
+From 6d57802d9d5da23cef4a79d38e6739bb60e7b96c Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Fri, 13 Feb 2015 19:52:02 +0900
-Subject: [PATCH 3/4] add .catkin to CMakeLists.txt
+Subject: [PATCH 3/5] add .catkin to CMakeLists.txt
 
 ---
  CMakeLists.txt | 26 ++++++++++++++++++++++++++

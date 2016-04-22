@@ -1,3 +1,26 @@
+## openhrp3 (kinetic) - 3.1.8-0
+
+The packages in the `openhrp3` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release openhrp3 -t kinetic -r kinetic` on `Fri, 22 Apr 2016 04:03:28 -0000`
+
+The `openhrp3` package was released.
+
+Version of package(s) in repository `openhrp3`:
+
+- upstream repository: https://github.com/fkanehiro/openhrp3.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `3.1.8-0`
+
+Versions of tools used:
+
+- bloom version: `0.5.21`
+- catkin_pkg version: `0.2.10`
+- rosdep version: `0.11.4`
+- rosdistro version: `0.4.4`
+- vcstools version: `0.1.38`
+
+
 ## openhrp3 (jade) - 3.1.8-0
 
 The packages in the `openhrp3` repository were released into the `jade` distro by running `/usr/bin/bloom-release openhrp3 -r jade -t jade` on `Wed, 22 Apr 2015 09:51:08 -0000`

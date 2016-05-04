@@ -8,6 +8,10 @@ tick_t get_tick()
     LARGE_INTEGER t;
     QueryPerformanceCounter(&t);
     return t.QuadPart;
+#elif defined(__AARCH64EL__)
+    uint64_t b;
+    asm volatile( "mrs %0, pmccntr_el0" : "=r"(b) :: "memory" );
+    return b;
 #else
     unsigned int l=0,h=0;
     __asm__ __volatile__("rdtsc" : "=a" (l), "=d" (h));

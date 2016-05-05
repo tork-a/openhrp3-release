@@ -1,0 +1,27 @@
+From 5c584d6e4b4274575020ef165d4509ec10e694dd Mon Sep 17 00:00:00 2001
+From: Kei Okada <kei.okada@gmail.com>
+Date: Thu, 5 May 2016 16:59:53 +0900
+Subject: [PATCH 2/2] /hrplib/hrpPlanner/TimeUtil.cpp : add (__ARM_ARCH_7A__)
+
+---
+ hrplib/hrpPlanner/TimeUtil.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/hrplib/hrpPlanner/TimeUtil.cpp b/hrplib/hrpPlanner/TimeUtil.cpp
+index 527d235..9bac3fc 100644
+--- a/hrplib/hrpPlanner/TimeUtil.cpp
++++ b/hrplib/hrpPlanner/TimeUtil.cpp
+@@ -8,6 +8,10 @@ tick_t get_tick()
+     LARGE_INTEGER t;
+     QueryPerformanceCounter(&t);
+     return t.QuadPart;
++#elif defined(__ARM_ARCH_7A__)
++    uint32_t r = 0;
++    asm volatile("mrc p15, 0, %0, c9, c13, 0" : "=r"(r) );
++    return r;
+ #elif defined(__AARCH64EL__)
+     uint64_t b;
+     asm volatile( "mrs %0, pmccntr_el0" : "=r"(b) :: "memory" );
+-- 
+1.9.1
+

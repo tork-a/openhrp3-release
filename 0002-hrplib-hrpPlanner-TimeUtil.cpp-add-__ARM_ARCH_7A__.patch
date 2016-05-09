@@ -1,7 +1,7 @@
-From 01c5eed59561d08e4817b5740300ebe80e05505e Mon Sep 17 00:00:00 2001
+From bb2b3ac22a9519a862c7792be6966b470267cb17 Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Thu, 5 May 2016 16:59:53 +0900
-Subject: [PATCH 2/3] /hrplib/hrpPlanner/TimeUtil.cpp : add (__ARM_ARCH_7A__)
+Subject: [PATCH 2/4] /hrplib/hrpPlanner/TimeUtil.cpp : add (__ARM_ARCH_7A__)
 
 ---
  hrplib/hrpPlanner/TimeUtil.cpp | 4 ++++

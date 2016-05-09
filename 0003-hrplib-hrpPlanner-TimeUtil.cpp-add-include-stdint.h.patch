@@ -1,7 +1,7 @@
-From 9d3d5147bb4d6280bdcfa0f5d7e6d094b41c021f Mon Sep 17 00:00:00 2001
+From e22ab19cd2b8df890de7c16f1a0626bd98695df0 Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Sat, 7 May 2016 00:58:29 +0900
-Subject: [PATCH 3/3] hrplib/hrpPlanner/TimeUtil.cpp : add include stdint.h
+Subject: [PATCH 3/4] hrplib/hrpPlanner/TimeUtil.cpp : add include stdint.h
 
 ---
  hrplib/hrpPlanner/TimeUtil.cpp | 1 +

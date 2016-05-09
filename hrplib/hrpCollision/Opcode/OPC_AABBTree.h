@@ -20,7 +20,7 @@
 #ifndef __OPC_AABBTREE_H__
 #define __OPC_AABBTREE_H__
 
-#if (defined __x86_64) || (defined __aarch64__)
+#ifdef __x86_64
 #define EXWORD uqword
 #else
 #define EXWORD udword

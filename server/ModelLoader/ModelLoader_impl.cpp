@@ -45,6 +45,16 @@ static bool IsColladaFile(const std::string& filename)
 
 #endif
 
+std::string replaceProjectDir(std::string url) {
+  std::string path = url;
+  if ( path.find("$(PROJECT_DIR)") != std::string::npos ) {
+    std::string shdir = OPENHRP_SHARE_DIR;
+    std::string pjdir = shdir + "/sample/project";
+    path.replace(path.find("$(PROJECT_DIR)"),14, pjdir);
+  }
+  return path;
+}
+
 ModelLoader_impl::ModelLoader_impl(CORBA::ORB_ptr orb, PortableServer::POA_ptr poa)
     :
     orb(CORBA::ORB::_duplicate(orb)),
@@ -112,38 +122,6 @@ static bool checkInlineFileUpdateTime(POA_OpenHRP::BodyInfo* bodyInfo)
     throw ModelLoader::ModelLoaderException("checkInlineFileUpdateTime invalid pointer");
 }
 
-static bool getParam(POA_OpenHRP::BodyInfo* bodyInfo, std::string param)
-{
-    BodyInfo_impl* pBodyInfo_impl = dynamic_cast<BodyInfo_impl*>(bodyInfo);
-    if( !!pBodyInfo_impl ) {
-        return pBodyInfo_impl->getParam(param);
-    }
-#ifdef OPENHRP_COLLADA_FOUND
-    BodyInfoCollada_impl* pBodyInfoCollada_impl = dynamic_cast<BodyInfoCollada_impl*>(bodyInfo);
-    if( !!pBodyInfoCollada_impl ) {
-        return pBodyInfoCollada_impl->getParam(param);
-    }
-#endif
-    throw ModelLoader::ModelLoaderException("getParam(param) invalid pointer");
-}
-
-static void setParam(POA_OpenHRP::BodyInfo* bodyInfo, std::string param, bool value)
-{
-    BodyInfo_impl* pBodyInfo_impl = dynamic_cast<BodyInfo_impl*>(bodyInfo);
-    if( !!pBodyInfo_impl ) {
-        pBodyInfo_impl->setParam(param,value);
-        return;
-    }
-#ifdef OPENHRP_COLLADA_FOUND
-    BodyInfoCollada_impl* pBodyInfoCollada_impl = dynamic_cast<BodyInfoCollada_impl*>(bodyInfo);
-    if( !!pBodyInfoCollada_impl ) {
-        pBodyInfoCollada_impl->setParam(param,value);
-        return;
-    }
-#endif
-    throw ModelLoader::ModelLoaderException("setParam(param,value) invalid pointer");
-}
-
 static void setParam(POA_OpenHRP::BodyInfo* bodyInfo, std::string param, int value)
 {
     BodyInfo_impl* pBodyInfo_impl = dynamic_cast<BodyInfo_impl*>(bodyInfo);
@@ -185,14 +163,14 @@ BodyInfo_ptr ModelLoader_impl::loadBodyInfo(const char* url)
     option.readImage = false;
     option.AABBdata.length(0);
     option.AABBtype = OpenHRP::ModelLoader::AABB_NUM;
-    POA_OpenHRP::BodyInfo* bodyInfo = loadBodyInfoFromModelFile(url, option);
+    POA_OpenHRP::BodyInfo* bodyInfo = loadBodyInfoFromModelFile(replaceProjectDir(std::string(url)), option);
     return bodyInfo->_this();
 }
 
 BodyInfo_ptr ModelLoader_impl::loadBodyInfoEx(const char* url, const OpenHRP::ModelLoader::ModelLoadOption& option)
     throw (CORBA::SystemException, OpenHRP::ModelLoader::ModelLoaderException)
 {
-    POA_OpenHRP::BodyInfo* bodyInfo = loadBodyInfoFromModelFile(url, option);
+    POA_OpenHRP::BodyInfo* bodyInfo = loadBodyInfoFromModelFile(replaceProjectDir(std::string(url)), option);
     if(option.AABBdata.length()){
         setParam(bodyInfo,"AABBType", (int)option.AABBtype);
         int length=option.AABBdata.length();
@@ -211,7 +189,7 @@ BodyInfo_ptr ModelLoader_impl::getBodyInfoEx(const char* url0, const OpenHRP::Mo
     string url(url0);
 
     BodyInfo_ptr bodyInfo = 0;
-    string filename(deleteURLScheme(url));
+    string filename(deleteURLScheme(replaceProjectDir(url)));
     struct stat statbuff;
     time_t mtime = 0;
 

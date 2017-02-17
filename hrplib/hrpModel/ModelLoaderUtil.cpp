@@ -238,7 +238,7 @@ Link* ModelLoaderHelper::createLink(int index, const Matrix33& parentRs)
     } else if(jt == "slide" ){
         link->jointType = Link::SLIDE_JOINT;
     } else if(jt == "crawler"){
-        link->jointType == Link::FIXED_JOINT;
+        link->jointType = Link::FIXED_JOINT;
         link->isCrawler = true;
     } else {
         link->jointType = Link::FREE_JOINT;
@@ -508,7 +508,6 @@ void ModelLoaderHelper::addLinkVerticesAndTriangles
     
     const ShapeInfo& shapeInfo = shapes[shapeIndex];
     int vertexIndexBase = vertexIndex;
-    int triangleIndexBase = triangleIndex;
     const FloatSequence& vertices = shapeInfo.vertices;
     const int numVertices = vertices.length() / 3;
     for(int j=0; j < numVertices; ++j){
@@ -644,7 +643,7 @@ BodyInfo_var hrp::loadBodyInfo(const char* url, CORBA_ORB_var orb)
         cxt = CosNaming::NamingContext::_narrow(nS);
     } catch(CORBA::SystemException& ex) {
         std::cerr << "NameService doesn't exist" << std::endl;
-        return false;
+        return BodyInfo::_nil();
     }
     return loadBodyInfo(url, cxt);
 }

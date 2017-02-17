@@ -1,4 +1,4 @@
-From 2c177bd4dbc25c4b0b95598f9fc6ade5c397f431 Mon Sep 17 00:00:00 2001
+From 5fdf270a107ccf1aae81e51cb720029555e5cafc Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Tue, 10 May 2016 03:25:36 +0900
 Subject: [PATCH 4/4] aarch64(ARMv8) is also 64bit machine
@@ -49,5 +49,5 @@ index 11bf0ab..4805edb 100644
  #else
  #define EXWORD udword
 -- 
-1.9.1
+1.9.0
 

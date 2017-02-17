@@ -1,4 +1,4 @@
-From e22ab19cd2b8df890de7c16f1a0626bd98695df0 Mon Sep 17 00:00:00 2001
+From 8bdf01187344f1d7adf349ee92f654fc5a131fef Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Sat, 7 May 2016 00:58:29 +0900
 Subject: [PATCH 3/4] hrplib/hrpPlanner/TimeUtil.cpp : add include stdint.h
@@ -20,5 +20,5 @@ index 9bac3fc..80a6f18 100644
  tick_t get_tick()
  {
 -- 
-1.9.1
+1.9.0
 

@@ -1,4 +1,4 @@
-From bb2b3ac22a9519a862c7792be6966b470267cb17 Mon Sep 17 00:00:00 2001
+From 675e1b7275d386e2b1ea23b094f7c05e8f3e9243 Mon Sep 17 00:00:00 2001
 From: Kei Okada <kei.okada@gmail.com>
 Date: Thu, 5 May 2016 16:59:53 +0900
 Subject: [PATCH 2/4] /hrplib/hrpPlanner/TimeUtil.cpp : add (__ARM_ARCH_7A__)
@@ -23,5 +23,5 @@ index 527d235..9bac3fc 100644
      uint64_t b;
      asm volatile( "mrs %0, pmccntr_el0" : "=r"(b) :: "memory" );
 -- 
-1.9.1
+1.9.0
 

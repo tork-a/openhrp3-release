@@ -15,6 +15,7 @@
 
 #ifdef __WIN32__
 #define NOMINMAX
+#define _USE_MATH_DEFINES       // for M_PI
 #endif
 
 #include "World.h"
@@ -128,15 +129,12 @@ namespace hrp
         inline void clearExternalForces();
 
 #undef PI
-#ifdef __WIN32__       // Visual C++ bug
+#if defined(M_PI) && defined (M_PI_2)
+#define PI M_PI
+#define PI_2 M_PI_2
+#else
         static const double PI;
         static const double PI_2;
-#elif defined(__APPLE__)
-#define PI M_PI
-#define PI_2 M_PI/2
-#else
-        static const double PI   = 3.14159265358979323846;
-        static const double PI_2 = 1.57079632679489661923;
 #endif
 
         WorldBase& world;
@@ -260,7 +258,7 @@ namespace hrp
         dvector solution;
 
         // random number generator
-        variate_generator<mt19937, uniform_real<> > randomAngle;
+        variate_generator<boost::mt19937, uniform_real<> > randomAngle;
 
         // for special version of gauss sidel iterative solver
         std::vector<int> frictionIndexToContactIndex;
@@ -367,7 +365,7 @@ namespace hrp
             if(CFS_DEBUG_VERBOSE) putVector(M, name);
         }
     };
-#ifdef __WIN32__
+#if !defined(M_PI) || !defined(M_PI_2)
 
     const double CFSImpl::PI   = 3.14159265358979323846;
     const double CFSImpl::PI_2 = 1.57079632679489661923;
@@ -378,7 +376,7 @@ namespace hrp
 
 CFSImpl::CFSImpl(WorldBase& world) :
     world(world),
-    randomAngle(mt19937(), uniform_real<>(0.0, 2.0 * PI))
+    randomAngle(boost::mt19937(), uniform_real<>(0.0, 2.0 * PI))
 {
     maxNumGaussSeidelIteration = DEFAULT_MAX_NUM_GAUSS_SEIDEL_ITERATION;
     numGaussSeidelInitialIteration = DEFAULT_NUM_GAUSS_SEIDEL_INITIAL_ITERATION;
@@ -500,7 +498,7 @@ void CFSImpl::initBody(BodyPtr body, BodyData& bodyData)
 
     LinkDataArray& linksData = bodyData.linksData;
     const LinkTraverse& traverse = body->linkTraverse();
-    for(int j=0; j < traverse.numLinks(); ++j){
+    for(unsigned int j=0; j < traverse.numLinks(); ++j){
         Link* link = traverse[j];
         linksData[link->index].link = link;
         linksData[link->index].parentIndex = link->parent ? link->parent->index : -1;
@@ -513,7 +511,7 @@ void CFSImpl::initExtraJoints(int bodyIndex)
 {
     BodyPtr body = world.body(bodyIndex);
     int numExtraJoints = body->extraJoints.size();
-    for(size_t j=0; j < numExtraJoints; ++j){
+    for(int j=0; j < numExtraJoints; ++j){
 
         Body::ExtraJoint& bodyExtraJoint = body->extraJoints[j];
         ExtraJointLinkPairPtr linkPair;
@@ -783,7 +781,7 @@ void CFSImpl::setConstraintPoints(CollisionSequence& collisions)
                 pCollisionPoints = 0;
             } else {
                 int npoints = 0;
-                for(int i = 0; i < cdata.size(); i++) {
+                for(unsigned int i = 0; i < cdata.size(); i++) {
                     for(int j = 0; j < cdata[i].num_of_i_points; j++){
                         if(cdata[i].i_point_new[j]) npoints++;
                     }
@@ -794,7 +792,7 @@ void CFSImpl::setConstraintPoints(CollisionSequence& collisions)
                 } else {
                     pCollisionPoints->length(npoints);
                     int idx = 0;
-                    for (int i = 0; i < cdata.size(); i++) {
+                    for (unsigned int i = 0; i < cdata.size(); i++) {
                         collision_data& cd = cdata[i];
                         for(int j=0; j < cd.num_of_i_points; j++){
                             if (cd.i_point_new[j]){

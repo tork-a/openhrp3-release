@@ -84,7 +84,7 @@ namespace hrp {
            In other words, the value represents the size of the link sequence
            obtained by joint() function.
         */
-        inline int numJoints() const {
+        inline unsigned int numJoints() const {
             return jointIdToLinkArray.size();
         }
 
@@ -109,7 +109,7 @@ namespace hrp {
            The number of all the links the body has.
            The value corresponds to the size of the sequence obtained by link() function.
         */
-        inline int numLinks() const {
+        inline unsigned int numLinks() const {
             return linkTraverse_.numLinks();
         }
 
@@ -159,11 +159,11 @@ namespace hrp {
             return allSensors[sensorType][sensorId];
         }
 
-        inline int numSensors(int sensorType) const {
+        inline unsigned int numSensors(int sensorType) const {
             return allSensors[sensorType].size();
         }
 
-        inline int numSensorTypes() const {
+        inline unsigned int numSensorTypes() const {
             return allSensors.size();
         }
 
@@ -210,6 +210,8 @@ namespace hrp {
         void calcInverseDynamics(Link* link, Vector3& out_f, Vector3& out_tau);
 
         void calcTotalMomentum(Vector3& out_P, Vector3& out_L);
+
+        void calcTotalMomentumFromJacobian(Vector3& out_P, Vector3& out_L);
 
         void setDefaultRootPosition(const Vector3& p, const Matrix33& R);
 
@@ -260,6 +262,13 @@ namespace hrp {
            @note Link::wc must be computed by calcCM() before calling
         */
         void calcCMJacobian(Link *base, dmatrix &J);
+        /**
+           @brief compute Angular Momentum Jacobian around CoM of base
+           @param base link fixed to the environment
+           @param H Angular Momentum Jacobian
+           @note Link::wc must be computed by calcCM() before calling
+        */
+        void calcAngularMomentumJacobian(Link *base, dmatrix &H);
       private:
 
         bool isStaticModel_;

@@ -20,6 +20,7 @@
 #include <fstream>
 #include <stack>
 #include "BodyInfo_impl.h"
+#include <sys/stat.h>
 
 using namespace std;
 void xmlTextWriterWriteProperty(const xmlTextWriterPtr writer, const std::string name, const std::string value) {
@@ -159,7 +160,7 @@ public:
     } else if(jt == "slide" ){
         link->jointType = Link::SLIDE_JOINT;
     } else if(jt == "crawler"){
-        link->jointType == Link::FIXED_JOINT;
+        link->jointType = Link::FIXED_JOINT;
         link->isCrawler = true;
     } else {
         link->jointType = Link::FREE_JOINT;
@@ -295,8 +296,10 @@ int main (int argc, char** argv)
 {
   std::string output;
   std::vector<std::string> inputs, filenames; // filenames is for conf file
-  std::string conf_file_option, robothardware_conf_file_option, integrate("true"), dt("0.005"), timeStep(dt), joint_properties;
+  std::string conf_file_option, robothardware_conf_file_option, integrate("true"), dt("0.005"), timeStep(dt), joint_properties, method("EULER");
   bool use_highgain_mode(true);
+  struct stat st;
+  bool file_exist_flag = false;
 
   for (int i = 1; i < argc; ++ i) {
     std::string arg(argv[i]);
@@ -317,6 +320,8 @@ int main (int argc, char** argv)
       if (++i < argc) joint_properties = argv[i];
     } else if ( arg == "--use-highgain-mode" ) {
       if (++i < argc) use_highgain_mode = (std::string(argv[i])==std::string("true")?true:false);
+    } else if ( arg == "--method" ) {
+      if (++i < argc) method = std::string(argv[i]);
     } else if ( arg.find("--gtest_output") == 0  ||arg.find("--text") == 0 || arg.find("__log") == 0 || arg.find("__name") == 0 ) { // skip
     } else {
       inputs.push_back(argv[i]);
@@ -345,6 +350,9 @@ int main (int argc, char** argv)
 	}
 
   xmlTextWriterPtr writer;
+  if (stat(output.c_str(), &st) == 0) {
+    file_exist_flag = true;
+  }
   writer = xmlNewTextWriterFilename(output.c_str(), 0);
   xmlTextWriterSetIndent(writer, 4);
   xmlTextWriterStartElement(writer, BAD_CAST "grxui");
@@ -359,7 +367,7 @@ int main (int argc, char** argv)
 	xmlTextWriterWriteProperty(writer, "integrate", integrate);
 	xmlTextWriterWriteProperty(writer, "timeStep", timeStep);
         xmlTextWriterWriteProperty(writer, "totalTime", "2000000.0");
-	xmlTextWriterWriteProperty(writer, "method", "EULER");
+	xmlTextWriterWriteProperty(writer, "method", method);
       }
       xmlTextWriterEndElement(writer); // item
       // default WAIST offset
@@ -435,12 +443,14 @@ int main (int argc, char** argv)
           xmlTextWriterWriteProperty(writer, "inport", "tauRef:JOINT_TORQUE");
         }
 	xmlTextWriterWriteProperty(writer, "outport", "q:JOINT_VALUE");
+    xmlTextWriterWriteProperty(writer, "outport", "dq:JOINT_VELOCITY");
     xmlTextWriterWriteProperty(writer, "outport", "tau:JOINT_TORQUE");
+    xmlTextWriterWriteProperty(writer, "outport", body->rootLink()->name+":"+body->rootLink()->name+":ABS_TRANSFORM");
 
     // set outport for sensros
     int nforce = body->numSensors(hrp::Sensor::FORCE);
     if ( nforce > 0 ) std::cerr << "hrp::Sensor::FORCE";
-    for (unsigned int i=0; i<nforce; i++){
+    for (int i=0; i<nforce; i++){
         hrp::Sensor *s = body->sensor(hrp::Sensor::FORCE, i);
         // port name and sensor name is same in case of ForceSensor
         xmlTextWriterWriteProperty(writer, "outport", s->name + ":" + s->name + ":FORCE_SENSOR");
@@ -455,7 +465,7 @@ int main (int argc, char** argv)
       xmlTextWriterWriteProperty(writer, "outport", s->name + ":" + s->name + ":RATE_GYRO_SENSOR");
       std::cerr << " " << s->name;
     }else{
-      for (unsigned int i=0; i<ngyro; i++){
+      for (int i=0; i<ngyro; i++){
         hrp::Sensor *s = body->sensor(hrp::Sensor::RATE_GYRO, i);
         std::stringstream str_strm;
         str_strm << s->name << i << ":" + s->name << ":RATE_GYRO_SENSOR";
@@ -472,7 +482,7 @@ int main (int argc, char** argv)
       xmlTextWriterWriteProperty(writer, "outport", s->name + ":" + s->name + ":ACCELERATION_SENSOR");
       std::cerr << " " << s->name;
     }else{
-      for (unsigned int i=0; i<nacc; i++){
+      for (int i=0; i<nacc; i++){
         hrp::Sensor *s = body->sensor(hrp::Sensor::ACCELERATION, i);
         std::stringstream str_strm;
         str_strm << s->name << i << ":" << s->name << ":ACCELERATION_SENSOR";
@@ -514,7 +524,7 @@ int main (int argc, char** argv)
           joint_properties_map.insert(std::pair<std::string, std::string>(joint_properties_arg_str[i*2], joint_properties_arg_str[i*2+1]));
         }
         if ( body->numJoints() > 0 ) std::cerr << "hrp::Joint";
-	for(int i = 0; i < body->numJoints(); i++){
+	for(unsigned int i = 0; i < body->numJoints(); i++){
 	  if ( body->joint(i)->index > 0 ) {
 	    std::cerr << " " << body->joint(i)->name << "(" << body->joint(i)->jointId << ")";
 	    std::string joint_name = body->joint(i)->name;
@@ -608,9 +618,15 @@ int main (int argc, char** argv)
 
   xmlFreeTextWriter(writer);
 
+  if (file_exist_flag) {
+    std::cerr << "\033[1;31mOver\033[0m";
+  }
   std::cerr << "Writing project files to .... " << output << std::endl;
   {
       std::string conf_file = output.substr(0,output.find_last_of('.'))+".conf";
+      if (stat(conf_file.c_str(), &st) == 0) {
+        std::cerr << "\033[1;31mOver\033[0m";
+      }
       std::fstream s(conf_file.c_str(), std::ios::out);
   
       s << "model: file://" << filenames[0] << std::endl;
@@ -621,6 +637,9 @@ int main (int argc, char** argv)
 
   {
       std::string conf_file = output.substr(0,output.find_last_of('.'))+".RobotHardware.conf";
+      if (stat(conf_file.c_str(), &st) == 0) {
+        std::cerr << "\033[1;31mOver\033[0m";
+      }
       std::fstream s(conf_file.c_str(), std::ios::out);
   
       s << "model: file://" << filenames[0] << std::endl;

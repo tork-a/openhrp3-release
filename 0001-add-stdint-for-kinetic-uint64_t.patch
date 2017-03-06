@@ -1,24 +1,23 @@
-From 8bdf01187344f1d7adf349ee92f654fc5a131fef Mon Sep 17 00:00:00 2001
-From: Kei Okada <kei.okada@gmail.com>
-Date: Sat, 7 May 2016 00:58:29 +0900
-Subject: [PATCH 3/4] hrplib/hrpPlanner/TimeUtil.cpp : add include stdint.h
+From d2bf1967864c6f4a283042534f5b19b13746699a Mon Sep 17 00:00:00 2001
+From: Kei Okada <k-okada@jsk.t.u-tokyo.ac.jp>
+Date: Mon, 6 Mar 2017 23:07:54 +0900
+Subject: [PATCH] add stdint for kinetic/uint64_t
 
 ---
  hrplib/hrpPlanner/TimeUtil.cpp | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/hrplib/hrpPlanner/TimeUtil.cpp b/hrplib/hrpPlanner/TimeUtil.cpp
-index 9bac3fc..80a6f18 100644
+index cdbc5b3..a09bffd 100644
 --- a/hrplib/hrpPlanner/TimeUtil.cpp
 +++ b/hrplib/hrpPlanner/TimeUtil.cpp
-@@ -1,6 +1,7 @@
+@@ -1,5 +1,6 @@
  #include <fstream>
  #include <iostream>
- #include "TimeUtil.h"
 +#include <stdint.h>
+ #include "TimeUtil.h"
  
  tick_t get_tick()
- {
 -- 
-1.9.0
+1.9.1
 

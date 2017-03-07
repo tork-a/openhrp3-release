@@ -1,4 +1,4 @@
-From d2bf1967864c6f4a283042534f5b19b13746699a Mon Sep 17 00:00:00 2001
+From 2ef6f7c04df5228d55ec011ebe482ffac48836f1 Mon Sep 17 00:00:00 2001
 From: Kei Okada <k-okada@jsk.t.u-tokyo.ac.jp>
 Date: Mon, 6 Mar 2017 23:07:54 +0900
 Subject: [PATCH] add stdint for kinetic/uint64_t
@@ -19,5 +19,5 @@ index cdbc5b3..a09bffd 100644
  
  tick_t get_tick()
 -- 
-1.9.1
+2.7.4
 

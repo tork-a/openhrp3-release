@@ -1,7 +1,7 @@
-From 2ef6f7c04df5228d55ec011ebe482ffac48836f1 Mon Sep 17 00:00:00 2001
+From 8dcbd48330d2684e21cf744d6562ccafd6fd8f49 Mon Sep 17 00:00:00 2001
 From: Kei Okada <k-okada@jsk.t.u-tokyo.ac.jp>
 Date: Mon, 6 Mar 2017 23:07:54 +0900
-Subject: [PATCH] add stdint for kinetic/uint64_t
+Subject: [PATCH 1/2] add stdint for kinetic/uint64_t
 
 ---
  hrplib/hrpPlanner/TimeUtil.cpp | 1 +
@@ -19,5 +19,5 @@ index cdbc5b3..a09bffd 100644
  
  tick_t get_tick()
 -- 
-2.7.4
+1.9.1
 

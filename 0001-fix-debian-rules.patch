@@ -1,0 +1,25 @@
+From 6231c4f106e43a769da30f9141a540802bb40862 Mon Sep 17 00:00:00 2001
+From: Kei Okada <k-okada@jsk.t.u-tokyo.ac.jp>
+Date: Tue, 13 Nov 2018 14:15:48 +0000
+Subject: [PATCH] fix debian rules
+
+---
+ debian/rules.em | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/debian/rules.em b/debian/rules.em
+index aa010fa..5a38744 100755
+--- a/debian/rules.em
++++ b/debian/rules.em
+@@ -26,7 +26,7 @@ override_dh_auto_configure:
+ 	# in the install tree that was dropped by catkin, and source it.  It will
+ 	# set things like CMAKE_PREFIX_PATH, PKG_CONFIG_PATH, and PYTHONPATH.
+ 	if [ -f "@(InstallationPrefix)/setup.sh" ]; then . "@(InstallationPrefix)/setup.sh"; fi && \
+-	dh_auto_configure -- -DCMAKE_INSTALL_PREFIX="@(InstallationPrefix)"
++	dh_auto_configure -- -DCATKIN_BUILD_BINARY_PACKAGE="1" -DCMAKE_INSTALL_PREFIX="@(InstallationPrefix)"
+ 
+ override_dh_auto_build:
+ 	# In case we're installing to a non-standard location, look for a setup.sh
+-- 
+2.17.1
+

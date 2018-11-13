@@ -1,4 +1,4 @@
-From 5b7e2ab1f81ba41abb8b3cd2fa232755efaea6c5 Mon Sep 17 00:00:00 2001
+From 1ec688458bc2aadaef11e9d1fd17e76b142c89cd Mon Sep 17 00:00:00 2001
 From: Kei Okada <k-okada@jsk.t.u-tokyo.ac.jp>
 Date: Tue, 13 Nov 2018 10:38:04 +0900
 Subject: [PATCH] update package.xml for melodic (update maintainer and

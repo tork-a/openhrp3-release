@@ -1,4 +1,4 @@
-From 9b56550be405c6c4ec8a4be3f91b4d1970c3386e Mon Sep 17 00:00:00 2001
+From 2009bfe0e634c32358422a7c7d34aa029e384de1 Mon Sep 17 00:00:00 2001
 From: Kei Okada <k-okada@jsk.t.u-tokyo.ac.jp>
 Date: Tue, 13 Nov 2018 14:15:48 +0000
 Subject: [PATCH] fix debian rules

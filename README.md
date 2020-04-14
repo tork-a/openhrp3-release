@@ -1,3 +1,26 @@
+## openhrp3 (melodic) - 3.1.9-4
+
+The packages in the `openhrp3` repository were released into the `melodic` distro by running `/usr/bin/bloom-release openhrp3 -y --rosdistro melodic --track melodic` on `Tue, 14 Apr 2020 07:30:49 -0000`
+
+The `openhrp3` package was released.
+
+Version of package(s) in repository `openhrp3`:
+
+- upstream repository: https://github.com/fkanehiro/openhrp3.git
+- release repository: https://github.com/tork-a/openhrp3-release.git
+- rosdistro version: `3.1.9-2`
+- old version: `3.1.9-3`
+- new version: `3.1.9-4`
+
+Versions of tools used:
+
+- bloom version: `0.9.0`
+- catkin_pkg version: `0.4.16`
+- rosdep version: `0.18.0`
+- rosdistro version: `0.8.0`
+- vcstools version: `0.1.42`
+
+
 ## openhrp3 (lunar) - 3.1.9-0
 
 The packages in the `openhrp3` repository were released into the `lunar` distro by running `/usr/bin/bloom-release openhrp3 --track lunar --rosdistro lunar` on `Mon, 11 Feb 2019 08:25:59 -0000`

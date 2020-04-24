@@ -1,7 +1,7 @@
-From 96284405df7989dfe84908767fd96736b0bf6688 Mon Sep 17 00:00:00 2001
+From ebcce5619fb7c2d39fd99cbda312c8f0ed15c8dd Mon Sep 17 00:00:00 2001
 From: Kei Okada <k-okada@jsk.t.u-tokyo.ac.jp>
 Date: Mon, 7 Aug 2017 13:32:32 +0900
-Subject: [PATCH 3/3] isNoUnknownAccelMode: c1/M11 is inistialized as 0 size
+Subject: [PATCH 3/4] isNoUnknownAccelMode: c1/M11 is inistialized as 0 size
  #126
 
 ---

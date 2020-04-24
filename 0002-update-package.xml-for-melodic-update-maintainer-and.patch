@@ -1,7 +1,7 @@
-From c68182486725f953a818c86f4a5afbe915fde95d Mon Sep 17 00:00:00 2001
+From 6ff5146bb8351045ae1be96e18978f3d30843443 Mon Sep 17 00:00:00 2001
 From: Kei Okada <k-okada@jsk.t.u-tokyo.ac.jp>
 Date: Tue, 13 Nov 2018 10:38:04 +0900
-Subject: [PATCH 2/3] update package.xml for melodic (update maintainer and
+Subject: [PATCH 2/4] update package.xml for melodic (update maintainer and
  libpng12-dev -> libpng-dev)
 
 ---

@@ -1,3 +1,26 @@
+## openhrp3 (noetic) - 3.1.9-3
+
+The packages in the `openhrp3` repository were released into the `noetic` distro by running `/usr/bin/bloom-release openhrp3 --rosdistro noetic --track noetic` on `Thu, 26 May 2022 09:32:17 -0000`
+
+The `openhrp3` package was released.
+
+Version of package(s) in repository `openhrp3`:
+
+- upstream repository: https://github.com/fkanehiro/openhrp3.git
+- release repository: https://github.com/tork-a/openhrp3-release.git
+- rosdistro version: `3.1.9-2`
+- old version: `3.1.9-2`
+- new version: `3.1.9-3`
+
+Versions of tools used:
+
+- bloom version: `0.11.1`
+- catkin_pkg version: `0.5.0`
+- rosdep version: `0.21.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## openhrp3 (noetic) - 3.1.9-2
 
 The packages in the `openhrp3` repository were released into the `noetic` distro by running `/usr/bin/bloom-release openhrp3 --track noetic --rosdistro noetic` on `Sun, 22 May 2022 07:40:28 -0000`

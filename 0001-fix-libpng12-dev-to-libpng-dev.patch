@@ -1,4 +1,4 @@
-From aef319b7214710bec3e3b17087543b9578fcec14 Mon Sep 17 00:00:00 2001
+From 946d8e1558c8a156a44dc4d0382d74ee8a912f5d Mon Sep 17 00:00:00 2001
 From: Kei Okada <k-okada@jsk.t.u-tokyo.ac.jp>
 Date: Thu, 26 May 2022 18:29:55 +0900
 Subject: [PATCH] fix libpng12-dev to libpng-dev

@@ -10,7 +10,7 @@
 /**
    \file
    \brief Implementations of the LinkPath class
-   \author Shin'ichiro Nakaoka
+   \author Shin'ichiro Nakaoka, Rafael Cisneros
 */
   
 #include "JointPath.h"
@@ -125,7 +125,7 @@ void JointPath::onJointPathUpdated()
 }
 
 
-void JointPath::calcJacobian(dmatrix& out_J) const
+void JointPath::calcJacobian(dmatrix& out_J, const Vector3& local_p) const
 {
     const int n = joints.size();
     out_J.resize(6, n);
@@ -143,7 +143,7 @@ void JointPath::calcJacobian(dmatrix& out_J) const
             case Link::ROTATIONAL_JOINT:
             {
                 Vector3 omega(link->R * link->a);
-                Vector3 arm(targetLink->p - link->p);
+                Vector3 arm(targetLink->p + targetLink->R * local_p - link->p);
                 if(!isJointDownward(i)){
                     omega *= -1.0;
                 } 
@@ -164,6 +164,58 @@ void JointPath::calcJacobian(dmatrix& out_J) const
 				
             default:
                 out_J.col(i).setZero();
+            }
+        }
+    }
+}
+
+
+void JointPath::calcJacobianDot(dmatrix& out_dJ, const Vector3& local_p) const
+{
+    const int n = joints.size();
+    out_dJ.resize(6, n);
+
+    if (n > 0) {
+
+        Link* targetLink = linkPath.endLink();
+
+        for (int i=0; i < n; ++i) {
+
+            Link* link = joints[i];
+
+            switch (link->jointType) {
+              
+            case Link::ROTATIONAL_JOINT:
+            {
+                Vector3 omega(link->R * link->a);
+                Vector3 arm(targetLink->p + targetLink->R * local_p - link->p);
+
+                Vector3 omegaDot(hat(link->w) * link->R * link->a);
+                Vector3 armDot(targetLink->v + hat(targetLink->w) * targetLink->R * local_p - link->v);
+
+                if (!isJointDownward(i)) {
+                    omega *= -1.0;
+                    omegaDot *= -1.0;
+                }
+
+                Vector3 ddp(omegaDot.cross(arm) + omega.cross(armDot));
+
+                out_dJ.col(i) << ddp, omegaDot;
+            }
+            break;
+
+            case Link::SLIDE_JOINT:
+            {
+                Vector3 ddp(hat(link->w) * link->R * link->d);
+                if (!isJointDownward(i)) {
+                    ddp *= -1.0;
+                }
+                out_dJ.col(i) << ddp, Vector3::Zero();  
+            }
+            break;
+
+            default:
+                out_dJ.col(i).setZero();
             }
         }
     }
@@ -201,6 +253,7 @@ bool JointPath::calcInverseKinematics(const Vector3& end_p, const Matrix33& end_
 {
     static const int MAX_IK_ITERATION = 50;
     static const double LAMBDA = 0.9;
+    static const double JOINT_LIMIT_MARGIN = 0.05;
     
     if(joints.empty()){
         if(linkPath.empty()){
@@ -264,6 +317,11 @@ bool JointPath::calcInverseKinematics(const Vector3& end_p, const Matrix33& end_
 		
         for(int j=0; j < n; ++j){
             joints[j]->q += LAMBDA * dq(j);
+            if (joints[j]->q > joints[j]->ulimit){
+              joints[j]->q = joints[j]->ulimit - JOINT_LIMIT_MARGIN;
+            }else if(joints[j]->q < joints[j]->llimit){
+              joints[j]->q = joints[j]->llimit + JOINT_LIMIT_MARGIN;
+            }
         }
 
         calcForwardKinematics();

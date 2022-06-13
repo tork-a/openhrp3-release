@@ -244,6 +244,7 @@ public:
             return false;
         }
         _WriteBindingsInstance_kinematics_scene(_scene.kiscene,bodyInfo,iasout->vaxissids,iasout->vkinematicsbindings);
+        return true;
     }
 
     /// \brief Write kinematic body in a given scene
@@ -580,7 +581,11 @@ public:
 	kmout->mapjointnames[std::string(links[0].name)] = 1000;
         for(size_t ilink = 0; ilink < vdomjoints.size(); ++ilink) {
             LinkInfo& linkInfo = links[ilink];
-            kmout->maplinknames[std::string(linkInfo.segments[0].name)] = ilink;
+            if (!linkInfo.segments.length()){
+              std::cerr << "Collada Warning: segment node for " << ilink << "th joint is not defined" << std::endl;
+            }else{
+              kmout->maplinknames[std::string(linkInfo.segments[0].name)] = ilink;
+            }
             string jointType(CORBA::String_var(linkInfo.jointType));
             daeString colladaelement;
             int dof = 1;
@@ -1023,9 +1028,9 @@ public:
         domFx_common_color_or_textureRef pambient = daeSafeCast<domFx_common_color_or_texture>(pphong->add(COLLADA_ELEMENT_AMBIENT));
         domFx_common_color_or_texture::domColorRef pambientcolor = daeSafeCast<domFx_common_color_or_texture::domColor>(pambient->add(COLLADA_ELEMENT_COLOR));
         pambientcolor->getValue().setCount(4);
-        pambientcolor->getValue()[0] = material.ambientIntensity;
-        pambientcolor->getValue()[1] = material.ambientIntensity;
-        pambientcolor->getValue()[2] = material.ambientIntensity;
+        pambientcolor->getValue()[0] = material.diffuseColor[0];
+        pambientcolor->getValue()[1] = material.diffuseColor[1];
+        pambientcolor->getValue()[2] = material.diffuseColor[2];
         pambientcolor->getValue()[3] = 1;
 
         domFx_common_color_or_textureRef pdiffuse = daeSafeCast<domFx_common_color_or_texture>(pphong->add(COLLADA_ELEMENT_DIFFUSE));
@@ -1151,7 +1156,7 @@ public:
         double max_speed = plink.uvlimit.length()/2*M_PI > 0 ? plink.uvlimit[0] : 0;
         domactuator->add("max_speed")->setCharData(str(boost::format("%f")%max_speed));
         domactuator->add("no_load_speed")->setCharData(str(boost::format("%f")%max_speed));
-        double max_torque = (plink.climit.length() > 0 ? plink.climit[0] : 0)*plink.gearRatio*plink.torqueConst;
+        double max_torque = std::abs((plink.climit.length() > 0 ? plink.climit[0] : 0)*plink.gearRatio*plink.torqueConst);
         domactuator->add("nominal_torque")->setCharData(str(boost::format("%f")%max_torque));
         domactuator->add("nominal_voltage")->setCharData("0");
         domactuator->add("rotor_inertia")->setCharData(str(boost::format("%f")%(plink.rotorInertia)));

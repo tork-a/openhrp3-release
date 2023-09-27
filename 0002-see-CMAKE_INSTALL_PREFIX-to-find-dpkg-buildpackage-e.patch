@@ -1,0 +1,27 @@
+From 56cdfcbbbce1dcd52ce81522c4f1837537611596 Mon Sep 17 00:00:00 2001
+From: Kei Okada <k-okada@jsk.t.u-tokyo.ac.jp>
+Date: Wed, 27 Sep 2023 19:55:40 +0900
+Subject: [PATCH 2/2] see CMAKE_INSTALL_PREFIX to find dpkg-buildpackage
+ environmet, CATKIN_BUILD_BINARY_PACKAGE is deprecated. see
+ https://github.com/search?q=repo%3Aros%2Fcatkin+CATKIN_BUILD_BINARY_PACKAGE&type=issues
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c8d991d..f06fb38 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -579,7 +579,7 @@ endif(ENABLE_CPACK)
+ 
+ #if catkin environment
+ string(REGEX MATCH "catkin" need_catkin "$ENV{_}")
+-if(need_catkin OR "${CATKIN_BUILD_BINARY_PACKAGE}")
++if(need_catkin OR "${CATKIN_BUILD_BINARY_PACKAGE}" OR CMAKE_INSTALL_PREFIX)
+   install(FILES package.xml DESTINATION share/openhrp3/)
+   install(DIRECTORY test DESTINATION share/openhrp3 USE_SOURCE_PERMISSIONS)
+   # this script is just for backwards compatibility. the roslaunch $(find ...) 
+-- 
+2.25.1
+
